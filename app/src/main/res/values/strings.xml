@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="app_name">SisGV</string>
+    <string name="action_settings">Configurações</string>
+    <string name="subtitulo">Cadastro de RML e RDS mais rápido e prático</string>
+    <string name="title_activity_tela_login">TelaLogin</string>
+    <string name="login">LOGIN</string>
+    <string name="title_activity_tela_home">Início</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="email_usuario">tadeu.nunes@bm.pr.gov.br</string>
+    <string name="text_dismiss">Descartar</string>
+    <string name="rml">RML</string>
+    <string name="rsd">RSD</string>
+    <string name="title_activity_rmlcadastro">RMLCadastro</string>
+    <string name="title_activity_rsdcadastro">RSDCadastro</string>
+
+</resources>

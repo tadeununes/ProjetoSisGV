@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="bombeiros.pr.gov.br.sisgv" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_lancador"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".TelaInicial"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TelaLogin"
+            android:label="@string/title_activity_tela_login"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TelaHome"
+            android:label="@string/title_activity_tela_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="fragment.RMLFragment"
+            android:label="@string/title_activity_tela_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RMLCadastro"
+            android:label="@string/title_activity_rmlcadastro"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".RSDCadastro"
+            android:label="@string/title_activity_rsdcadastro"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+    </application>
+
+</manifest>

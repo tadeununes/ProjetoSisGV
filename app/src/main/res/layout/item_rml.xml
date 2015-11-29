@@ -6,7 +6,7 @@
     android:paddingTop="20dp">
 
     <ImageView
-        android:id="@+id/iv_home"
+        android:id="@+id/iv_rml"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
@@ -14,21 +14,21 @@
         android:src="@drawable/logorml_10" />
 
     <TextView
-        android:id="@+id/tv_home_1"
+        android:id="@+id/tv_rml_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:layout_toRightOf="@+id/iv_home"
+        android:layout_toRightOf="@+id/iv_rml"
         android:paddingRight="16dp"
         android:textColor="@color/colorPrimaryText"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/tv_home_2"
+        android:id="@+id/tv_rml_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tv_home_1"
-        android:layout_below="@+id/tv_home_1"
+        android:layout_alignLeft="@+id/tv_rml_1"
+        android:layout_below="@+id/tv_rml_1"
         android:paddingRight="16dp"
         android:textColor="@color/colorPrimaryText"
         android:textSize="12sp" />

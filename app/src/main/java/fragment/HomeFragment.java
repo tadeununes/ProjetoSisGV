@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +18,11 @@ import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.List;
 
-import adapter.RMLAdapter;
+import adapter.HomeAdapter;
 import bombeiros.pr.gov.br.sisgv.R;
 import bombeiros.pr.gov.br.sisgv.RMLCadastro;
 import bombeiros.pr.gov.br.sisgv.RSDCadastro;
 import bombeiros.pr.gov.br.sisgv.TelaHome;
-import bombeiros.pr.gov.br.sisgv.TelaLogin;
 import domain.RML;
 import interfaces.RecyclerViewOnClickListenerHack;
 
@@ -40,7 +41,11 @@ public class HomeFragment extends Fragment implements RecyclerViewOnClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Início");
+
+        setFloatingActionButton(view);
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list_home);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -60,7 +65,7 @@ public class HomeFragment extends Fragment implements RecyclerViewOnClickListene
 
                 LinearLayoutManager llm = (LinearLayoutManager) mRecyclerView.getLayoutManager();
 
-                RMLAdapter adapter = (RMLAdapter) mRecyclerView.getAdapter();
+                HomeAdapter adapter = (HomeAdapter) mRecyclerView.getAdapter();
 
                 if (mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1) {
                     List<RML> listAux = ((TelaHome) getActivity()).getSetRMLList(10);
@@ -72,25 +77,22 @@ public class HomeFragment extends Fragment implements RecyclerViewOnClickListene
             }
         });
 
-
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
 
         //criar adapter
         mList = ((TelaHome) getActivity()).getSetRMLList(10);
-        RMLAdapter adapter = new RMLAdapter(getActivity(), mList);
+        HomeAdapter adapter = new HomeAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerHack(this);
         mRecyclerView.setAdapter(adapter);
-
-        setFloatingActionButton(view);
 
         return view;
     }
 
     public void setFloatingActionButton(View view) {
         //fab = (FloatingActionMenu) getActivity().findViewById(R.id.fab);
-        fab = (FloatingActionMenu) view.findViewById(R.id.fab);
+        fab = (FloatingActionMenu) view.findViewById(R.id.fab_home);
         fab.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
             @Override
             public void onMenuToggle(boolean b) {
@@ -100,8 +102,8 @@ public class HomeFragment extends Fragment implements RecyclerViewOnClickListene
         fab.showMenuButton(true);
         fab.setClosedOnTouchOutside(true);
 
-        FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.fab1);
-        FloatingActionButton fab2 = (FloatingActionButton) view.findViewById(R.id.fab2);
+        FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.fab1_home);
+        FloatingActionButton fab2 = (FloatingActionButton) view.findViewById(R.id.fab2_home);
 
         fab1.setOnClickListener(this);
         fab2.setOnClickListener(this);
@@ -111,7 +113,7 @@ public class HomeFragment extends Fragment implements RecyclerViewOnClickListene
     public void onClickListener(View view, int position) {
         Toast.makeText(getActivity(), "Position: " + position, Toast.LENGTH_SHORT).show();
 
-        RMLAdapter adapter = (RMLAdapter) mRecyclerView.getAdapter();
+        HomeAdapter adapter = (HomeAdapter) mRecyclerView.getAdapter();
         adapter.removeListItem(position);
     }
 
@@ -120,12 +122,12 @@ public class HomeFragment extends Fragment implements RecyclerViewOnClickListene
         //String aux = "";
 
         switch (v.getId()) {
-            case R.id.fab1:
+            case R.id.fab1_home:
                 //aux = "Fab 1 clicked";
                 Intent it_home_rmlCadastro = new Intent(getContext(), RMLCadastro.class);
                 startActivity(it_home_rmlCadastro);
                 break;
-            case R.id.fab2:
+            case R.id.fab2_home:
                 //aux = "Fab 2 clicked";
                 Intent it_home_rsdCadastro = new Intent(getContext(), RSDCadastro.class);
                 startActivity(it_home_rsdCadastro);

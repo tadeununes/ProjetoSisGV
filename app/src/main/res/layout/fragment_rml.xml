@@ -1,77 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".Inicial"
-    android:id="@+id/Inser">
+    tools:context="fragment.RMLFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list_rml"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 
-    <TextView
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_rml"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="PGV:"
-        android:id="@+id/tv_pgv"
-        android:layout_marginTop="47dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_gravity="bottom|right"
+        android:paddingBottom="16dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="16dp"
+        fab:menu_colorNormal="@android:color/holo_green_dark"
+        fab:menu_colorPressed="@color/colorAccentDark"
+        fab:menu_icon="@drawable/ic_fab_plus_button"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_pgv"
-        android:layout_below="@+id/tv_pgv"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab1_rml"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fab_rml_button"
+            fab:fab_colorNormal="@color/colorAccent"
+            fab:fab_colorPressed="@color/colorAccentDark"
+            fab:fab_size="normal" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Data:"
-        android:id="@+id/tv_data"
-        android:layout_below="@+id/et_pgv"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="51dp" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab2_rml"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fab_rsd_button"
+            fab:fab_colorNormal="@color/colorPrimaryDark"
+            fab:fab_colorPressed="@color/colorPrimary"
+            fab:fab_size="normal" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_data"
-        android:layout_below="@+id/tv_data"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/et_pgv"
-        android:layout_alignEnd="@+id/et_pgv" />
+    </com.github.clans.fab.FloatingActionMenu>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cadastrar"
-        android:id="@+id/btn_rml"
-        android:layout_below="@+id/et_data"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="72dp"
-        android:layout_alignRight="@+id/et_data"
-        android:layout_alignEnd="@+id/et_data" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/tv3"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-</RelativeLayout>
+</FrameLayout>

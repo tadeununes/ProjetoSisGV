@@ -2,63 +2,218 @@ package bombeiros.pr.gov.br.sisgv;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionMenu;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.interfaces.OnCheckedChangeListener;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import domain.RML;
+import domain.RSD;
 import fragment.HomeFragment;
+import fragment.RMLFragment;
+import fragment.RSDFragment;
 
-public class TelaHome extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class TelaHome extends AppCompatActivity {
+
+    private Toolbar toolbar;
+
+    private Drawer navigationDrawerLeft;
+    private AccountHeader headerNavigationLeft;
 
     private FloatingActionMenu fab;
+
+    private List<PrimaryDrawerItem> listCategorias;
+    private List<RML> listRML;
+    private List<RSD> listRSD;
+
+    private int mPositionClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_tela_home);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        fab = (FloatingActionMenu) findViewById(R.id.fab_home);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-
         // FRAGMENT
-        HomeFragment frag = (HomeFragment) getSupportFragmentManager().findFragmentByTag("mainFrag");
+
+        HomeFragment frag = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFrag");
         if (frag == null) {
             frag = new HomeFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.rl_fragment_container, frag, "mainFrag");
+            ft.replace(R.id.rl_home_fragment_container, frag, "homeFrag");
             ft.commit();
         }
 
-        fab = (FloatingActionMenu) findViewById(R.id.fab);
+        //NAVIGATION DRAWER
+        //HEADER - LEFT
+        headerNavigationLeft = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withCompactStyle(false)
+                .withSavedInstance(savedInstanceState)
+                .withThreeSmallProfileImages(false)
+                .withSelectionListEnabledForSingleProfile(false)
+                .withHeaderBackground(R.drawable.bkg_sidebar_10)
+                .addProfiles(
+                        new ProfileDrawerItem().withName("Ten. Nunes")
+                                .withEmail("tadeu.nunes@bm.pr.gov.br")
+                                .withIcon(getResources().getDrawable(R.drawable.perfil_sidebar))
+                )
+                .build();
+
+        //BODY - LEFT
+        navigationDrawerLeft = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withDisplayBelowStatusBar(true)
+                .withActionBarDrawerToggleAnimated(true)
+                .withDrawerGravity(Gravity.START)
+                .withSavedInstance(savedInstanceState)
+                .withAccountHeader(headerNavigationLeft)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        switch (position) {
+                            case 1: {
+                                HomeFragment frag = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFrag");
+                                if (frag == null) {
+                                    frag = new HomeFragment();
+                                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                    ft.replace(R.id.rl_home_fragment_container, frag, "homeFrag");
+                                    ft.commit();
+                                }
+                                break;
+                            }
+                            case 2: {
+                                RMLFragment frag = (RMLFragment) getSupportFragmentManager().findFragmentByTag("rmlFrag");
+                                if (frag == null) {
+                                    frag = new RMLFragment();
+                                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                    ft.replace(R.id.rl_home_fragment_container, frag, "rmlFrag");
+                                    ft.commit();
+                                }
+                                break;
+                            }
+                            case 3: {
+                                RSDFragment frag = (RSDFragment) getSupportFragmentManager().findFragmentByTag("rsdFrag");
+                                if (frag == null) {
+                                    frag = new RSDFragment();
+                                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                    ft.replace(R.id.rl_home_fragment_container, frag, "rsdFrag");
+                                    ft.commit();
+                                }
+                                break;
+                            }
+
+                        }
+
+                        Toast.makeText(TelaHome.this, "onItemClick: " + position, Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                })
+                .withOnDrawerItemLongClickListener(new Drawer.OnDrawerItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(View view, int position, IDrawerItem drawerItem) {
+                        Toast.makeText(TelaHome.this, "onItemLongClick: " + position, Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                })
+                .build();
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem()
+                .withName("Início").withIcon(getResources()
+                        .getDrawable(R.mipmap.ic_home)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem()
+                .withName("RML").withIcon(getResources()
+                        .getDrawable(R.mipmap.ic_rml_navbar)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem()
+                .withName("RSD").withIcon(getResources()
+                        .getDrawable(R.mipmap.ic_rsd_navbar)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem()
+                .withName("Sobre").withIcon(getResources()
+                        .getDrawable(R.mipmap.ic_sobre_navbar)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem()
+                .withName("Sair").withIcon(getResources()
+                        .getDrawable(R.mipmap.ic_exit)));
+
+    }
+
+
+    //FAZER CATEGORIAS DE RSD E RML COMO AS CATEGORIAS DE CARRO,
+
+    /*
+    private List<PrimaryDrawerItem> getSetCategoryList(){
+        String[] names = new String[]{"Início", "RML", "RSD", "Sobre", "Sair"};
+        int[] icons = new int[]{R.mipmap.ic_inicio, R.mipmap.ic_rml_navbar, R.mipmap.ic_rsd_navbar,
+                R.mipmap.ic_sobre_navbar, R.mipmap.ic_sair_navdrawer};
+        int[] iconsSelected = new int[]{R.mipmap.ic_inicio, R.mipmap.ic_rml_navbar, R.mipmap.ic_rsd_navbar,
+                R.mipmap.ic_sobre_navbar, R.mipmap.ic_sair_navdrawer};
+        List<PrimaryDrawerItem> list = new ArrayList<>();
+
+        for(int i = 0; i < names.length; i++){
+            PrimaryDrawerItem aux = new PrimaryDrawerItem();
+            aux.withName(names[i]);
+            aux.withIcon(getResources().getDrawable(icons[i]));
+            aux.withSelectedTextColor(getResources().getColor(R.color.colorPrimaryText));
+            aux.withSelectedIcon(getResources().getDrawable(iconsSelected[i]));
+            aux.withSelectedTextColor(getResources().getColor(R.color.colorPrimary));
+
+            list.add( aux );
+        }
+        return(list);
+    }
+    */
+
+    public List<RML> getSetRMLList(int qtd) {
+
+        String[] PGV = new String[]{"PGV Central", "PGV Thalia", "PGV Brejatuba", "PGV Banestado", "PGV Leste II", "PGV Ipanema III",
+                "PGV UFPR", "PGV Albatroz", "PGV Gaivotas"};
+        String[] data = new String[]{"20 dez. 15", "23 dez. 15", "19 jan. 16", "12 dez. 15", "9 fev. 16", "17 jan. 16", "14 dez. 15",
+                "15 fev. 15", "2 jan. 16"};
+        int[] photo = new int[]{R.drawable.logorml_10, R.drawable.logorsd_10, R.drawable.logorml_10, R.drawable.logorsd_10, R.drawable.logorml_10,
+                R.drawable.logorsd_10, R.drawable.logorml_10, R.drawable.logorsd_10, R.drawable.logorml_10, R.drawable.logorsd_10,};
+        List<RML> listAux = new ArrayList<>();
+
+        for (int i = 0; i < qtd; i++) {
+            RML rml = new RML(photo[i % PGV.length], PGV[i % PGV.length], data[i % data.length]);
+            listAux.add(rml);
+
+        }
+        return (listAux);
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState = navigationDrawerLeft.saveInstanceState(outState);
+        outState = headerNavigationLeft.saveInstanceState(outState);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (navigationDrawerLeft.isDrawerOpen()) {
+            navigationDrawerLeft.closeDrawer();
         } else {
             super.onBackPressed();
         }
@@ -86,48 +241,5 @@ public class TelaHome extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_rml) {
-
-        } else if (id == R.id.nav_rsd) {
-
-        } else if (id == R.id.nav_sobre) {
-
-        } else if (id == R.id.nav_sair) {
-            finish();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    //FAZER CATEGORIAS DE RSD E RML COMO AS CATEGORIAS DE CARRO,
-    //SETANDO TBM OS FRAGMENTS DE CADA UMA DELAS
-    public List<RML> getSetRMLList(int qtd) {
-
-        String[] PGV = new String[]{"PGV Central", "PGV Thalia", "PGV Brejatuba", "PGV Banestado", "PGV Leste II", "PGV Ipanema III",
-                "PGV UFPR", "PGV Albatroz", "PGV Gaivotas"};
-        String[] data = new String[]{"20 dez. 15", "23 dez. 15", "19 jan. 16", "12 dez. 15", "9 fev. 16", "17 jan. 16", "14 dez. 15",
-                "15 fev. 15", "2 jan. 16"};
-        int[] photos = new int[]{R.drawable.logorml_10, R.drawable.logorsd_10, R.drawable.logorml_10, R.drawable.logorsd_10, R.drawable.logorml_10,
-                R.drawable.logorsd_10, R.drawable.logorml_10, R.drawable.logorsd_10, R.drawable.logorml_10, R.drawable.logorsd_10,};
-        List<RML> listAux = new ArrayList<>();
-
-       for (int i = 0; i < qtd; i++) {
-            RML rml = new RML(0, PGV[i % PGV.length], data[i % data.length]);
-            //RML rml = new RML(PGV[i % PGV.length], data[i % data.length], photos[i % PGV.length]);
-            listAux.add(rml);
-
-        }
-        return (listAux);
-    }
 
 }

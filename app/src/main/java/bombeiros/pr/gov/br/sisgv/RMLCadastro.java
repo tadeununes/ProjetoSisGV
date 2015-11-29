@@ -1,5 +1,6 @@
 package bombeiros.pr.gov.br.sisgv;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -7,11 +8,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
-public class RMLCadastro extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+
+public class RMLCadastro extends AppCompatActivity {
+
+    private Drawer navigationDrawerLeft;
+    private AccountHeader headerNavigationLeft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,21 +34,92 @@ public class RMLCadastro extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        //NAVIGATION DRAWER
+        //HEADER - LEFT
+        headerNavigationLeft = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withCompactStyle(false)
+                .withSavedInstance(savedInstanceState)
+                .withThreeSmallProfileImages(false)
+                .withSelectionListEnabledForSingleProfile(false)
+                .withHeaderBackground(R.drawable.bkg_sidebar_10)
+                .addProfiles(
+                        new ProfileDrawerItem().withName("Ten. Nunes")
+                                .withEmail("tadeu.nunes@bm.pr.gov.br")
+                                .withIcon(getResources().getDrawable(R.drawable.perfil_sidebar))
+                )
+                .build();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        //BODY - LEFT
+        navigationDrawerLeft = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(toolbar)
+                .withDisplayBelowStatusBar(true)
+                .withActionBarDrawerToggleAnimated(true)
+                .withDrawerGravity(Gravity.START)
+                .withSavedInstance(savedInstanceState)
+                .withAccountHeader(headerNavigationLeft)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        switch (position) {
+                            case 1: {
+                                Intent it = new Intent(getBaseContext(), TelaHome.class);
+                                startActivity(it);
+                                break;
+                            }
+                            case 2: {
+                                Toast.makeText(RMLCadastro.this, "Mandar parâmetro para setar RMLFragment no TelaHome", Toast.LENGTH_SHORT).show();
+                                break;
+                            }
+                            case 3: {
+                                Toast.makeText(RMLCadastro.this, "Mandar parâmetro para setar RSDFragment no TelaHome", Toast.LENGTH_SHORT).show();
+                                break;
+                            }
+                        }
+
+                        Toast.makeText(RMLCadastro.this, "onItemClick: " + position, Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                })
+                .withOnDrawerItemLongClickListener(new Drawer.OnDrawerItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(View view, int position, IDrawerItem drawerItem) {
+                        Toast.makeText(RMLCadastro.this, "onItemLongClick: " + position, Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                })
+                .build();
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem()
+                .withName("Início").withIcon(getResources()
+                        .getDrawable(R.mipmap.ic_home)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem()
+                .withName("RML").withIcon(getResources()
+                        .getDrawable(R.mipmap.ic_rml_navbar)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem()
+                .withName("RSD").withIcon(getResources()
+                        .getDrawable(R.mipmap.ic_rsd_navbar)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem()
+                .withName("Sobre").withIcon(getResources()
+                        .getDrawable(R.mipmap.ic_sobre_navbar)));
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem()
+                .withName("Sair").withIcon(getResources()
+                        .getDrawable(R.mipmap.ic_exit)));
+
+
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState = navigationDrawerLeft.saveInstanceState(outState);
+        outState = headerNavigationLeft.saveInstanceState(outState);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (navigationDrawerLeft.isDrawerOpen()) {
+            navigationDrawerLeft.closeDrawer();
         } else {
             super.onBackPressed();
         }
@@ -62,26 +147,5 @@ public class RMLCadastro extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_rml) {
-
-        } else if (id == R.id.nav_rsd) {
-
-        } else if (id == R.id.nav_sobre) {
-
-        } else if (id == R.id.nav_sair) {
-            finish();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }

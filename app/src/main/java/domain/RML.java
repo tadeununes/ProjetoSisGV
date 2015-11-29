@@ -10,22 +10,22 @@ import android.os.Parcelable;
 public class RML { //implements Parcelable
 
     //PARA TESTE DO SQLITE
-    private int idrml;
+    private int photo;
     private String PGV;
     private String data;
 
-    public RML(int idrml, String PGV, String data) {
-        this.idrml = idrml;
+    public RML(int photo, String PGV, String data) {
+        this.photo = photo;
         this.PGV = PGV;
         this.data = data;
     }
 
-    public int getIdrml() {
-        return idrml;
+    public int getPhoto() {
+        return photo;
     }
 
-    public void setIdrml(int idrml) {
-        this.idrml = idrml;
+    public void setPhoto(int photo) {
+        this.photo = photo;
     }
 
     public String getPGV() {
@@ -43,6 +43,11 @@ public class RML { //implements Parcelable
     public void setData(String data) {
         this.data = data;
     }
+
+
+
+
+
 
 
 

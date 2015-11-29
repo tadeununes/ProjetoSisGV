@@ -18,16 +18,35 @@ import interfaces.RecyclerViewOnClickListenerHack;
 /**
  * Created by Tadeu on 09/11/2015.
  */
-public class RMLAdapter extends RecyclerView.Adapter<RMLAdapter.MyViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> {
 
+    private Context mContext;
     private List<RML> mList;
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerHack mRecyclerViewOnClickListenerHack;
+    private float scale;
+    private int width;
+    private int height;
 
+    private boolean withAnimation;
+    private boolean withCardLayout;
 
-    public RMLAdapter(Context c, List<RML> l) {
+    public HomeAdapter(Context c, List<RML> l) {
         mList = l;
         mLayoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public HomeAdapter(Context c, List<RML> l, boolean wa, boolean wcl){
+        mContext = c;
+        mList = l;
+        mLayoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        withAnimation = wa;
+        withCardLayout = wcl;
+
+        scale = mContext.getResources().getDisplayMetrics().density;
+        width = mContext.getResources().getDisplayMetrics().widthPixels - (int)(14 * scale + 0.5f);
+        height = (width / 16) * 9;
     }
 
 
@@ -43,8 +62,8 @@ public class RMLAdapter extends RecyclerView.Adapter<RMLAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder myViewHolder, int position) {
         Log.i("LOG", "onBindViewHolder()");
         //myViewHolder.ivRML.setImageResource(mList.get(position).getPhoto());
-        myViewHolder.tvRML1.setText(mList.get(position).getPGV());
-        myViewHolder.tvRML2.setText(mList.get(position).getData());
+        myViewHolder.tvHome1.setText(mList.get(position).getPGV());
+        myViewHolder.tvHome2.setText(mList.get(position).getData());
     }
 
     @Override
@@ -70,16 +89,16 @@ public class RMLAdapter extends RecyclerView.Adapter<RMLAdapter.MyViewHolder> {
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageView ivRML;
-        public TextView tvRML1;
-        public TextView tvRML2;
+        public ImageView ivHome;
+        public TextView tvHome1;
+        public TextView tvHome2;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            ivRML = (ImageView) itemView.findViewById(R.id.iv_rml);
-            tvRML1 = (TextView) itemView.findViewById(R.id.tv_rml_1);
-            tvRML2 = (TextView) itemView.findViewById(R.id.tv_rml_2);
+            ivHome = (ImageView) itemView.findViewById(R.id.iv_home);
+            tvHome1 = (TextView) itemView.findViewById(R.id.tv_home_1);
+            tvHome2 = (TextView) itemView.findViewById(R.id.tv_home_2);
 
             itemView.setOnClickListener(this);
         }

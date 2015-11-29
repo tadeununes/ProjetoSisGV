@@ -24,8 +24,8 @@ public class TelaInicial extends AppCompatActivity  {
             protected Void doInBackground(Void... params) {
                 //Log.d(TAG, "doing some work in background");
                 try {
-                    for (int i = 0; i <= 100; i++) {
-                        Thread.sleep(20);
+                    for (int i = 0; i <= 80; i++) {
+                        Thread.sleep(1);
                         publishProgress(i);
                     }
                 } catch (InterruptedException e) {
@@ -38,7 +38,6 @@ public class TelaInicial extends AppCompatActivity  {
             protected void onProgressUpdate(Integer... values) {
                //Log.d(TAG, "update progress bar here: " + values[0]);
             }
-
             @Override
             protected void onPostExecute(Void result) {
                 //Log.d(TAG, "finishing background work, can start activity here");

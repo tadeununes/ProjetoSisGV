@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_fragment_cadastro_rml"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:useDefaultMargins="true"
+        tools:context="fragment.RMLFragment"
+        tools:showIn="@layout/act_tela_rmlcadastro">
+
+        <Spinner
+            android:id="@+id/sp_subarea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:entries="@array/subareas" />
+
+        <Spinner
+            android:id="@+id/sp_pgv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/sp_subarea"
+            android:layout_margin="20dp" />
+
+        <TextView
+            android:id="@+id/tv_data_rml"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/sp_pgv"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:text="Data"/>
+
+        <TextView
+            android:id="@+id/tv_hora_inicial_rml"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_data_rml"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:text="Hora inicial"/>
+
+        <TextView
+            android:id="@+id/tv_hora_final_rml"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_hora_inicial_rml"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:text="Hora final"/>
+
+        <Spinner
+            android:id="@+id/sp_turno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tv_hora_final_rml"
+            android:layout_margin="20dp"
+            android:entries="@array/turno"
+            android:prompt="@string/rml_cadastro_turno_prompt" />
+
+        <Spinner
+            android:id="@+id/sp_clima"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/sp_turno"
+            android:layout_margin="20dp"
+            android:entries="@array/clima"
+            android:prompt="@string/rml_cadastro_clima_prompt" />
+
+        <Spinner
+            android:id="@+id/sp_mare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/sp_clima"
+            android:layout_margin="20dp"
+            android:entries="@array/mare"
+            android:prompt="@string/rml_cadastro_mare_prompt" />
+
+        <Spinner
+            android:id="@+id/sp_gv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/sp_mare"
+            android:layout_margin="20dp"
+            android:entries="@array/gv1"
+            android:prompt="@string/rml_cadastro_gv1_prompt" />
+
+        <Spinner
+            android:id="@+id/sp_gv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/sp_gv1"
+            android:layout_margin="20dp"
+            android:entries="@array/gv2"
+            android:prompt="@string/rml_cadastro_gv2_prompt" />
+
+        <Spinner
+            android:id="@+id/sp_gv3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/sp_gv2"
+            android:layout_margin="20dp"
+            android:entries="@array/gv3"
+            android:prompt="@string/rml_cadastro_gv3_prompt" />
+
+        <Spinner
+            android:id="@+id/sp_gv4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/sp_gv3"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:entries="@array/gv4"
+            android:prompt="@string/rml_cadastro_gv4_prompt" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/et_obs_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sp_gv4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp">
+
+            <EditText
+                android:id="@+id/et_obs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:hint="@string/obs"
+                android:inputType="text"
+                android:textColor="@color/colorPrimaryText"/>
+        </android.support.design.widget.TextInputLayout>
+
+    </RelativeLayout>
+</ScrollView>

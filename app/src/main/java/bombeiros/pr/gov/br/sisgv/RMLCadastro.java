@@ -1,17 +1,21 @@
 package bombeiros.pr.gov.br.sisgv;
 
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -22,17 +26,33 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
+import domain.RML;
+import fragment.RMLCadastroFragment;
+
 public class RMLCadastro extends AppCompatActivity {
 
     private Drawer navigationDrawerLeft;
     private AccountHeader headerNavigationLeft;
+    RML rml;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_tela_rmlcadastro);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        // FRAGMENT
+
+        RMLCadastroFragment frag = (RMLCadastroFragment) getSupportFragmentManager().findFragmentByTag("rmlCadastroFrag");
+        if (frag == null) {
+            frag = new RMLCadastroFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.rml_cadastro_fragment_container, frag, "homeFrag");
+            ft.commit();
+        }
 
         //NAVIGATION DRAWER
         //HEADER - LEFT
@@ -140,7 +160,8 @@ public class RMLCadastro extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.concluirCadastro) {
+            Toast.makeText(this, "posto selecionado: " , Toast.LENGTH_SHORT).show();
             return true;
         }
 

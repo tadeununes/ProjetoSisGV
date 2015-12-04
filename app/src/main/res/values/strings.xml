@@ -12,7 +12,19 @@
     <string name="text_dismiss">Descartar</string>
     <string name="rml">RML</string>
     <string name="rsd">RSD</string>
-    <string name="title_activity_rmlcadastro">RMLCadastro</string>
-    <string name="title_activity_rsdcadastro">RSDCadastro</string>
+    <string name="title_activity_rmlcadastro">Cadastro RML</string>
+    <string name="title_activity_rsdcadastro">Cadastro RSD</string>
+    <string name="rascunho">Salvar rascunho</string>
+    <string name="concluir">Concluir cadastro</string>
+    <string name="rml_cadastro_subarea_prompt">Subárea</string>
+    <string name="rml_cadastro_pgv_prompt">PGV</string>
+    <string name="rml_cadastro_turno_prompt">Turno</string>
+    <string name="rml_cadastro_clima_prompt">Condição climática</string>
+    <string name="rml_cadastro_mare_prompt">Maré</string>
+    <string name="rml_cadastro_gv1_prompt">Guarda-vidas 1</string>
+    <string name="rml_cadastro_gv2_prompt">Guarda-vidas 2</string>
+    <string name="rml_cadastro_gv3_prompt">Guarda-vidas 3</string>
+    <string name="rml_cadastro_gv4_prompt">Guarda-vidas 4</string>
+    <string name="obs">Observações</string>
 
 </resources>

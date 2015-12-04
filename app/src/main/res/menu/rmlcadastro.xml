@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+
+    <group android:id="@+id/group">
+        <item
+            android:id="@+id/salvarRascunho"
+            android:icon="@mipmap/ic_edit_pencil"
+            android:menuCategory="alternative"
+            android:orderInCategory="1"
+            android:title="@string/concluir"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/concluirCadastro"
+            android:icon="@mipmap/ic_check"
+            android:menuCategory="container"
+            android:orderInCategory="2"
+            android:title="@string/rascunho"
+            app:showAsAction="always" />
+    </group>
+
 </menu>
